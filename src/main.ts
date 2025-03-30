@@ -19,6 +19,43 @@ class Scene {
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     
     this.init();
+    
+    // Mobile optimizations
+    this.setupMobileControls();
+  }
+
+  private setupMobileControls() {
+    // Separate desktop and mobile controls
+    if ('ontouchstart' in window) {
+      // Touch device settings
+      this.controls.enableDamping = true;
+      this.controls.dampingFactor = 0.05;
+      this.controls.rotateSpeed = 0.5;
+      this.controls.touches = {
+        ONE: THREE.TOUCH.ROTATE,
+        TWO: THREE.TOUCH.DOLLY_PAN
+      };
+    } else {
+      // Desktop mouse settings
+      this.controls.enableDamping = false;
+      this.controls.rotateSpeed = 1.0;
+      this.controls.zoomSpeed = 1.0;
+      this.controls.panSpeed = 1.0;
+    }
+
+    // Common settings for both
+    this.controls.enableZoom = true;
+    this.controls.enablePan = true;
+
+    // Handle device orientation if available
+    if (window.DeviceOrientationEvent) {
+      window.addEventListener('deviceorientation', (event) => {
+        if (event.beta && event.gamma) {
+          // Optional: Add device orientation controls
+          // this.handleDeviceOrientation(event);
+        }
+      });
+    }
   }
 
   private init() {
@@ -38,6 +75,9 @@ class Scene {
     const material = new THREE.MeshPhongMaterial({ color: 0x00ff00 });
     const cube = new THREE.Mesh(geometry, material);
     this.scene.add(cube);
+
+    // Update renderer for mobile
+    this.renderer.setPixelRatio(window.devicePixelRatio);
 
     // Animation loop
     const animate = () => {

@@ -6,12 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>3D Web Page</title>
     <link rel="stylesheet" href="/src/style.css">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   </head>
   <body>
     <div id="app" class="relative w-screen h-screen">
       <canvas id="scene"></canvas>
       <div class="absolute top-0 left-0 p-4">
-        <h1 class="text-white text-3xl font-bold">3D Web Scene</h1>
+        <h1 class="text-white text-3xl font-bold md:text-3xl text-xl">3D Web Scene</h1>
+      </div>
+      <!-- Mobile UI elements -->
+      <div class="mobile-controls md:hidden">
+        <div class="text-white text-sm opacity-50">
+          One finger: Rotate | Two fingers: Zoom
+        </div>
       </div>
     </div>
     <script type="module" src="/src/main.ts"></script>

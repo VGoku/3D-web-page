@@ -5,4 +5,23 @@
 canvas {
   width: 100vw;
   height: 100vh;
+  touch-action: none; /* Prevents default touch actions */
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .mobile-controls {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+  }
+}
+
+/* Prevent text selection during touch */
+* {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
