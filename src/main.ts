@@ -58,9 +58,18 @@ class Scene {
 
   public loadModel(path: string) {
     const loader = new GLTFLoader();
-    loader.load(path, (gltf) => {
-      this.scene.add(gltf.scene);
-    });
+    loader.load(
+      path,
+      (gltf) => {
+        this.scene.add(gltf.scene);
+      },
+      (progress) => {
+        console.log('Loading progress:', (progress.loaded / progress.total * 100) + '%');
+      },
+      (error) => {
+        console.error('Error loading model:', error);
+      }
+    );
   }
 }
 
