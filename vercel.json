@@ -1,7 +1,5 @@
 {
   "version": 2,
-  "buildCommand": "npm run vercel-build",
-  "outputDirectory": "dist",
   "builds": [
     {
       "src": "server/index.ts",
@@ -9,8 +7,7 @@
     },
     {
       "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": { "zeroConfig": true }
+      "use": "@vercel/static-build"
     }
   ],
   "routes": [
@@ -19,15 +16,11 @@
       "dest": "server/index.ts"
     },
     {
-      "src": "/models/(.*)",
-      "dest": "public/models/$1"
-    },
-    {
       "handle": "filesystem"
     },
     {
       "src": "/(.*)",
-      "dest": "/index.html"
+      "dest": "/"
     }
   ]
 }
