@@ -5,11 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "tsc --noEmit && vite build",
     "typecheck": "tsc --noEmit",
     "preview": "vite preview",
     "server": "tsx watch server/index.ts",
-    "vercel-build": "vite build"
+    "vercel-build": "tsc --noEmit && vite build"
   },
   "dependencies": {
     "dotenv": "^16.3.1",
