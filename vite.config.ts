@@ -5,7 +5,17 @@ import autoprefixer from 'autoprefixer';
 export default defineConfig({
   server: {
     proxy: {
-      '/api': 'http://localhost:3000'
+      '/api': process.env.VITE_API_URL || 'http://localhost:3000'
+    }
+  },
+  build: {
+    outDir: 'dist',
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          three: ['three']
+        }
+      }
     }
   },
   css: {
